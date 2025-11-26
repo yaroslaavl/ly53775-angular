@@ -1,0 +1,18 @@
+version: "3.9"
+
+services:
+
+  ly53775:
+    image: postgres:16.1
+    container_name: ly53775-database
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: ly53775-app
+      POSTGRES_USER: ly53775
+      POSTGRES_PASSWORD: ly53775
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

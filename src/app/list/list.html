@@ -1,0 +1,16 @@
+<h2>List component</h2>
+
+<input
+  type="text"
+  [(ngModel)]="new"
+  placeholder="Write here"
+/>
+
+<button (click)="addItem()">add</button>
+
+<ul>
+  <li *ngFor="let item of createdI; index as i">
+    {{ item }}
+    <a href="#" (click)="removeItem(i)">delete</a>
+  </li>
+</ul>

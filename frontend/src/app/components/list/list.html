@@ -1,0 +1,9 @@
+<h2>List of people</h2>
+<a routerLink="/add">Add new</a>
+<ul>
+  <li *ngFor="let person of persons">
+    {{ person.firstName }} {{ person.familyName }} - {{ person.age }} years
+    <a [routerLink]="['/details', person.id]">DETAILS</a>
+    <button (click)="delete(person.id)">DELETE</button>
+  </li>
+</ul>

@@ -4,17 +4,21 @@ import { RouterLink } from '@angular/router';
 import { PersonService } from '../../services/person';
 import { Person } from '../../modules/person.interface';
 
+import { MatButtonModule } from '@angular/material/button';
+import { MatListModule } from '@angular/material/list';
+import { MatCardModule } from '@angular/material/card';
+
 @Component({
   selector: 'app-list',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, MatButtonModule, MatListModule, MatCardModule],
   templateUrl: './list.html',
   styleUrls: ['./list.css'],
 })
 export class ListComponent implements OnInit {
   persons: Person[] = [];
-  loading: boolean = false;
-  error: string = '';
+  loading = false;
+  error = '';
 
   constructor(private personService: PersonService, private cdr: ChangeDetectorRef) {}
 
@@ -24,23 +28,22 @@ export class ListComponent implements OnInit {
 
   loadPersons() {
     this.loading = true;
+    this.persons = [];
     this.personService.getAll().subscribe({
-      next: (data: Person[]) => {
+      next: (data) => {
         this.persons = data;
         this.loading = false;
-
         this.cdr.detectChanges();
       },
       error: (err) => {
         this.error = err.message;
         this.loading = false;
-        this.cdr.detectChanges();
       },
     });
   }
 
   delete(id?: number) {
-    if (id === undefined) return;
+    if (!id) return;
     this.personService.delete(id).subscribe({
       next: () => this.loadPersons(),
       error: (err) => (this.error = err.message),

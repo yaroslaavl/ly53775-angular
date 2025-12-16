@@ -5,16 +5,39 @@ import { Person } from '../../modules/person.interface';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+
 @Component({
   selector: 'app-add-person',
-  imports: [CommonModule, FormsModule],
+  standalone: true,
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatInputModule,
+    MatButtonModule,
+    MatCardModule,
+    MatFormFieldModule,
+  ],
   templateUrl: './add-person.html',
   styleUrls: ['./add-person.css'],
 })
 export class AddPersonComponent {
-  person: Person = { address: {} };
-  loading: boolean = false;
-  error: string = '';
+  person: Person = {
+    firstName: '',
+    familyName: '',
+    age: 0,
+    address: {
+      city: '',
+      street: '',
+      postCode: '',
+    },
+  };
+
+  loading = false;
+  error = '';
 
   constructor(private personService: PersonService, private router: Router) {}
 

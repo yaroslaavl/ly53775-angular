@@ -1,20 +1,23 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { Person } from '../../modules/person.interface';
 import { PersonService } from '../../services/person';
+import { Person } from '../../modules/person.interface';
 import { CommonModule } from '@angular/common';
+
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-details',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, MatCardModule, MatButtonModule],
   templateUrl: './details.html',
   styleUrls: ['./details.css'],
 })
 export class DetailsComponent implements OnInit {
   person?: Person;
-  loading: boolean = false;
-  error: string = '';
+  loading = false;
+  error = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -32,16 +35,14 @@ export class DetailsComponent implements OnInit {
   getById(id: number) {
     this.loading = true;
     this.personService.getById(id).subscribe({
-      next: (data: Person) => {
+      next: (data) => {
         this.person = data;
         this.loading = false;
-
         this.cdr.detectChanges();
       },
       error: (err) => {
         this.error = err.message;
         this.loading = false;
-        this.cdr.detectChanges();
       },
     });
   }

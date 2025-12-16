@@ -1,9 +1,16 @@
-<h2>Details</h2>
-<div *ngIf="person">
-  <p>firstName: {{person.firstName}}</p>
-  <p>familyName: {{person.familyName}}</p>
-  <p>age: {{person.age}}</p>
-  <p>city: {{person.address.city}}</p>
-  <p>street: {{person.address.street}}</p>
-  <p>postCode: {{person.address.postCode}}</p>
-</div>
+<mat-card *ngIf="person" class="details-card">
+  <mat-card-title>Person details</mat-card-title>
+
+  <mat-card-content>
+    <p><strong>First name:</strong> {{ person.firstName }}</p>
+    <p><strong>Family name:</strong> {{ person.familyName }}</p>
+    <p><strong>Age:</strong> {{ person.age }}</p>
+    <p><strong>City:</strong> {{ person.address.city }}</p>
+    <p><strong>Street:</strong> {{ person.address.street }}</p>
+    <p><strong>Post code:</strong> {{ person.address.postCode }}</p>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button mat-stroked-button color="primary" routerLink="/">Back</button>
+  </mat-card-actions>
+</mat-card>

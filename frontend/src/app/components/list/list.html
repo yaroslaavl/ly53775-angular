@@ -1,9 +1,21 @@
-<h2>List of people</h2>
-<a routerLink="/add">Add new</a>
-<ul>
-  <li *ngFor="let person of persons">
-    {{ person.firstName }} {{ person.familyName }} - {{ person.age }} years
-    <a [routerLink]="['/details', person.id]">DETAILS</a>
-    <button (click)="delete(person.id)">DELETE</button>
-  </li>
-</ul>
+<mat-card class="list-card">
+  <mat-card-title>List of people</mat-card-title>
+
+  <button mat-raised-button color="primary" routerLink="/add" class="add-btn">Add new</button>
+
+  <mat-nav-list>
+    <mat-list-item *ngFor="let person of persons">
+      <span matListItemTitle> {{ person.firstName }} {{ person.familyName }} </span>
+
+      <span matListItemLine> Age: {{ person.age }} </span>
+
+      <div matListItemMeta class="actions">
+        <button mat-stroked-button color="accent" [routerLink]="['/details', person.id]">
+          DETAILS
+        </button>
+
+        <button mat-flat-button color="warn" (click)="delete(person.id)">DELETE</button>
+      </div>
+    </mat-list-item>
+  </mat-nav-list>
+</mat-card>
